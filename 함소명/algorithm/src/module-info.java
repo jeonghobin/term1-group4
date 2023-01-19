@@ -1,9 +1,2 @@
-/**
- * 
- */
-/**
- * @author SSAFY
- *
- */
-module algorithm {
+module Algorithm {
 }
