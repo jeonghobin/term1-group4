@@ -3,6 +3,8 @@ package baekjoon;
 import java.util.*;
 import java.io.*;
 
+// 요세푸스 순열 문제
+// 자료구조를 익히기 위해 풀어 보면 좋은 문제
 
 public class Main {
 	
