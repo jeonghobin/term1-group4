@@ -1,38 +1,54 @@
+package backalgo;
 import java.util.*;
 public class Main {
 
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) {
 
 		Scanner sc=new Scanner(System.in);
-		String number=sc.next();
-		ArrayList<Integer> array = new ArrayList<>();
-		for(int i=0;i<10;i++) {
-			array.add(0);
-		}
-		
-		for(int i=0;i<number.length();i++) {
-			int num=Character.getNumericValue(number.charAt(i));
-			array.set(num, array.get(num)+1);
-		}
-		
-		int count=0;
-		for(int i=0;i<10;i++) {
-			if(i==6) {
-				continue;
-			}
-			else if(i==9) {
-				if((array.get(6)+array.get(9))%2==0) {
-					count=Math.max(count, (array.get(6)+array.get(9))/2);
+		int t = sc.nextInt();
+		ArrayList<Character> list1=new ArrayList<>();
+		list1.add('A');
+		list1.add('D');
+		list1.add('O');
+		list1.add('P');
+		list1.add('Q');
+		list1.add('R');
+		for(int i=0;i<t;i++) {
+			String a=sc.next();
+			String b=sc.next();
+			boolean check=false;
+			if(a.length()==b.length()) {
+				for(int j=0;j<a.length();j++) {
+					if(a.charAt(j)==b.charAt(j)) {
+						check=true;
+						continue;
+					}
+					else {
+						if(list1.contains(a.charAt(j))&&list1.contains(b.charAt(j))) {
+							check=true;
+							continue;
+						}
+						
+						if(a.charAt(j)=='B'&&b.charAt(j)=='B') {
+							check=true;
+							continue;
+						}
+						else if(a.charAt(j)!='B'&&b.charAt(j)!='B'&&list1.contains(a.charAt(j))==false&&false==list1.contains(b.charAt(j))) {
+							check=true;
+						}
+						else {
+							check=false;
+							break;
+						}
+					}
 				}
-				else {
-					count=Math.max(count, 1+(array.get(6)+array.get(9))/2);
-				}
-				
+			}		
+			if(check==false) {
+				System.out.println("#"+(i+1)+" DIFF");
 			}
 			else {
-				count=Math.max(count, array.get(i));
+				System.out.println("#"+(i+1)+" SAME");
 			}
 		}
-		System.out.println(count);
 	}
 }
