@@ -9,10 +9,10 @@ public class Boj_1436 {
 
         int N = Integer.parseInt(br.readLine());
         String a = "666";
-        int[] data = new int[10000];
+        int[] data = new int[N];
         data[0] = 666;
 
-        for (int i = 1; i < 10000; i++) {
+        for (int i = 1; i < N; i++) {
             int start = data[i-1];
             while(true) {
                 start++;
