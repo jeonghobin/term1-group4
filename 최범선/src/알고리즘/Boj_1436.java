@@ -9,15 +9,15 @@ public class Boj_1436 {
 
         int N = Integer.parseInt(br.readLine());
         String a = "666";
-        int[] data = new int[10001];
+        int[] data = new int[10000];
         data[0] = 666;
-        int cnt = 0;
 
         for (int i = 1; i < 10000; i++) {
             int start = data[i-1];
             while(true) {
                 start++;
                 String temp = start + "";
+//                temp.contains(a);
                 if (temp.indexOf(a) != -1	) {
                     data[i] = start;
                     break;
