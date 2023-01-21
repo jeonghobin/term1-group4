@@ -3,7 +3,7 @@ package 알고리즘;
 import java.io.*;
 import java.util.*;
 
-public class Boj1018 {
+public class Boj_1018 {
 
     static char[][] data;
     static char[] index = {'W' , 'B'};
