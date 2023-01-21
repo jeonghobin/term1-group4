@@ -13,12 +13,9 @@ public class Robot {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         int tc = Integer.parseInt(br.readLine().trim());
-        int[] dx_A = {0};
-        int[] dy_A = {1};
-        int[] dx_B = {0, 0};
-        int[] dy_B = {-1, 1};
-        int[] dx_C = {0,-1,0,1};
-        int[] dy_C = {1,0,-1,0};
+
+        int[] dx = {0,0,-1,1};
+        int[] dy = {1,-1,0,0};
 
         for (int t = 1; t < tc + 1; t++) {
             int N = Integer.parseInt(br.readLine().trim());
@@ -39,26 +36,26 @@ public class Robot {
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
                     if (data[i][j] == 1){
-                        int x = i+dx_A[0], y = j +dy_A[0];
+                        int x = i+dx[0], y = j +dy[0];
                         while (y < N && data[x][y] == 0){
                             count++;
-                            y += dy_A[0];
+                            y += dy[0];
                         }
                     }else if(data[i][j] == 2){
                         for (int k = 0; k < 2; k++) {
-                            int x = i + dx_B[k], y = j + dy_B[k];
+                            int x = i + dx[k], y = j + dy[k];
                             while (y >=0 && y < N && data[x][y] == 0){
                                 count++;
-                                y += dy_B[k];
+                                y += dy[k];
                             }
                         }
                     }else if(data[i][j] == 3){
                         for (int k = 0; k < 4; k++) {
-                            int x = i + dx_C[k], y = j + dy_C[k];
+                            int x = i + dx[k], y = j + dy[k];
                             while ( x >= 0 && x < N && y >= 0 && y < N && data[x][y] == 0){
                                 count++;
-                                x += dx_C[k];
-                                y += dy_C[k];
+                                x += dx[k];
+                                y += dy[k];
                             }
                         }
                     }
