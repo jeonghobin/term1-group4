@@ -3,9 +3,6 @@ package homework.Baekjoon.s3_17413;
 import java.io.*;
 import java.util.*;
 
-// 이게 왜 가능함?
-// for + while하면 최악 10억 번 돌지 않나요??????
-
 public class Main2 {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
