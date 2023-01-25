@@ -41,12 +41,7 @@ public class D3_2805 {
 				} else {
 					start = start + 1;
 					end = end - 1;
-				}
-
-//					if(arr[0][center])
-//						if(arr[1][center-1 ~ +1])
-//							if(arr[center][center-center ~ +center])
-//								if(arr[center+1][center-1 ~ +1])					
+				}					
 
 			}
 
