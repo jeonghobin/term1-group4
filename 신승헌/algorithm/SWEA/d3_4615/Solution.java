@@ -1,11 +1,11 @@
-package homwork.SWEA.d3_4625;
+package homwork.SWEA.d3_4615;
 
 import java.io.*;
 import java.util.*;
 
 public class Solution {
 	public static void main(String[] args) throws Exception {
-		System.setIn(new FileInputStream("res/d3_4625/input.txt"));
+		System.setIn(new FileInputStream("res/d3_4615/input.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		StringBuilder sb = new StringBuilder();
@@ -23,7 +23,15 @@ public class Solution {
 			int M = Integer.parseInt(st.nextToken()); // 돌놓는 횟수
 			
 			
+		
+			
 			int[][] array = new int[N][N];
+			
+			int mid = N / 2;
+			array[mid - 1][mid - 1] = 2;
+			array[mid - 1][mid] = 1;
+			array[mid][mid - 1] = 1;
+			array[mid][mid] = 2;
 			
 			int white = 0;
 			int black = 0;
