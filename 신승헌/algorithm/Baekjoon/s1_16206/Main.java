@@ -1,6 +1,8 @@
 package homework.Baekjoon.s1_16206;
 
 //w3-txt-15
+// 틀려서 아래로 다시 짬
+// 로직은 동일한데 배열 -> 리스트로 구분
 import java.io.*;
 import java.util.*;
 
