@@ -24,7 +24,7 @@ public class problem_11 {
 			for (int j = 0; j < N; j++) {
 				StringTokenizer str = new StringTokenizer(br.readLine());
 				for (int k = 0; k < N; k++) {
-					list[j][k] = str.nextToken();// 한글자씩
+					list[j][k] = str.nextToken();
 				}
 			}
 

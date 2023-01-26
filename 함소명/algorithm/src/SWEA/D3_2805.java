@@ -20,7 +20,7 @@ public class D3_2805 {
 			for (int i = 0; i < N; i++) {
 				String str = br.readLine();
 				for (int j = 0; j < N; j++) {
-					arr[i][j] = str.charAt(j)-'0';//숫자 문자열을 숫자로
+					arr[i][j] = str.charAt(j)-'0';
 				}
 			}
 
@@ -29,6 +29,7 @@ public class D3_2805 {
 
 			int sum = 0;
 			int center = N / 2;
+			//마름모 범위
 			for (int i = 0; i < N; i++) {
 			
 				for (int j = start; j <= end; j++) {
