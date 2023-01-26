@@ -84,7 +84,12 @@ public class Boj_1520 {
         }
 
         System.out.println(recursive(0,0)); // 왼쪽 위에 지점부터 오른쪽 아래 지점까지의 경로를 찾기 위해 (0,0)부터 시작
-
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                System.out.print(visited[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }
 
