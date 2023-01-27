@@ -75,6 +75,9 @@ public class Main {
 
 		for (int i = 1; i < switchArray.length; i++) {
 			System.out.print(switchArray[i] + " ");
+			if (i % 20 == 0) {
+				System.out.println();
+			}
 		}
 	}
 }
