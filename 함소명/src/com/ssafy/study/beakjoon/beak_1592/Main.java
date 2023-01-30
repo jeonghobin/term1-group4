@@ -1,4 +1,4 @@
-package Baekjoon.beak_1592;
+package com.ssafy.study.beakjoon.beak_1592;
 
 import java.io.BufferedReader;
 import java.io.IOException;

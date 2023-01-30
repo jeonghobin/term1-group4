@@ -1,4 +1,4 @@
-package SWEA;
+package com.ssafy.study.swea;
 
 import java.util.Scanner;
 

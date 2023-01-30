@@ -1,4 +1,4 @@
-package LSJ;
+package com.ssafy.study.LSJ;
 
 import java.io.BufferedReader;
 import java.io.IOException;

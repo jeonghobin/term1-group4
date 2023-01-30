@@ -1,4 +1,4 @@
-package Baekjoon.beak_2441;
+package com.ssafy.study.beakjoon.beak_2442;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,13 +11,18 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
 
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
-				if(j<i)
-					System.out.print(" ");
-				else
-					System.out.print("*");
+		for (int i = 1; i <= N; i++) {
+
+			// 공백찍기
+			for (int j = i; j < N; j++) {
+				System.out.print(" ");
 			}
+
+			// 별찍기
+			for (int k = 0; k < i * 2 - 1; k++) {
+				System.out.print("*");
+			}
+			// 줄바꿈
 			System.out.println();
 		}
 		
