@@ -1,6 +1,8 @@
 import java.util.*;
 import java.io.*;
 
+// 백준 10974 모든순열
+// 모든 순열의 경우의 수를 출력
 
 public class Main {
 	
