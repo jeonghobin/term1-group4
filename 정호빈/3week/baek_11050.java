@@ -1,6 +1,8 @@
 import java.util.*;
 import java.io.*;
 
+// 백준 11050 이항계수1
+// 조합의 경우의 수 를 구함
 
 public class Main {
 	static boolean[] visited;
