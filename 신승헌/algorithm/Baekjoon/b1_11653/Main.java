@@ -10,7 +10,7 @@ public class Main {
 		
 		int N = Integer.parseInt(st.nextToken());
 
-		for ( int i = 2; true; ) {
+		for (int i = 2; true; ) {
 			if (N % i == 0) {
 				N = N / i;
 				System.out.println(i);
