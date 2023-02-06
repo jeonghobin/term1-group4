@@ -3,6 +3,7 @@ package com.ssafy.study.swea;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 //원재의 메모리 복구하기
@@ -12,39 +13,38 @@ import java.util.StringTokenizer;
 public class D3_1289 {
 
 	static int[] arr;
-	
+
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
-		
-		
+
 		for (int test_case = 1; test_case <= N; test_case++) {
 			String str = br.readLine();
 
 			arr = new int[str.length()];
-			
-			StringTokenizer st = new StringTokenizer(str);
-			for (int i = 0; i < arr.length; i++) {
-				arr[i] = Integer.parseInt(st.nextToken());
+
+			for (int i = 0; i < str.length(); i++) {
+				arr[i] = str.charAt(i)-'0';
 			}
-			
-			System.out.print("#"+test_case+" ");
-			recursive(0,0);
+
+			System.out.print("#" + test_case + " ");
+			recursive(0, 0, 0);
 			System.out.println();
 		}
-
 	}
-	
-	public static void recursive(int idx, int cnt) {
-		
-		if(idx==arr.length) {
+
+	public static void recursive(int idx, int temp, int cnt) {
+
+		if (idx == arr.length) {
 			System.out.print(cnt);
 			return;
 		}
-			
-		
-//		if(arr[idx]==arr[idx])
-		
-		
+
+		if (temp != arr[idx]) {
+			cnt++;
+			temp = arr[idx];
+		}
+
+		recursive(idx + 1, temp, cnt);
 	}
 }
