@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
 
 /***
  * 최적 경로
@@ -27,65 +26,62 @@ class Position {
 
 public class D5_1247 {
 
-	static int T, Ans, N;
-
+	static int Min;
+	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int T = Integer.parseInt(br.readLine());
 
-		for (int Test_case = 0; Test_case < T; Test_case++) {
+		for (int Test_case = 1; Test_case <= T; Test_case++) {
+			Min = Integer.MAX_VALUE;
 			int N = Integer.parseInt(br.readLine());
-			Position[] cus = new Position[N];
 			StringTokenizer st = new StringTokenizer(br.readLine());
-			N = Integer.parseInt(st.nextToken());
-			Position[] ps = new Position[N];
+			
 			Position company = new Position(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
 			Position home = new Position(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
 
-			
+			Position[] pos = new Position[N];
 			for (int i = 0; i < N; i++) {
-				cus[i] = new Position(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
+				pos[i] = new Position(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
 			}
 			System.out.print("#" + Test_case + " ");
-			DFS(cus, new Position[N], new boolean[N], 0, company, home);
+			DFS(pos, company, home, new Position[N], 0, new boolean[N]);
+			System.out.println(Min);
 		}
 		
 	}
 
 	/**
 	 * 
-	 * @param cus[] : 고객 집 위치
-	 * @param sel[] : 위치 잡기
-	 * @param v[] : 백트래킹 막기
+	 * @param pos : 고객들의 집 위치
+	 * @param company : 회사 위치(출발)
+	 * @param home : 집 위치(도착)
+	 * @param sel : 담을 배열
 	 * @param k : 인덱스
-	 * @param com : 회사 좌표
-	 * @param home : 집 좌표
 	 */
-	public static void DFS(Position[] cus, Position[] sel, boolean[] v, int k, Position com, Position home) {
+	
+	public static void DFS(Position[] pos, Position company, Position home, Position[] sel, int k, boolean[] v) {
+		if(k == sel.length) {
+			k=0;
+			int cul = Math.abs(company.x - sel[0].x)+Math.abs(company.y - sel[0].y);
+			int doch = Math.abs(home.x - sel[sel.length-1].x)+Math.abs(home.y - sel[sel.length-1].y);
 
-		if(k==sel.length) {
-			//고객의 집 순서가 순열로 sel배열에 입력되었으니
-			//회사에서 -번째 고객 방문
-			//마지막 고객에서 집으로
-			
-			int c = Math.abs(com.x - cus[0].x)+Math.abs(com.y - cus[0].y);
-			int h = Math.abs(sel[sel.length-1].x - home.x)+Math.abs(sel[sel.length-1].y - home.y);
-			int sum = 0;
-			for (int i = 0; i < N-1; i++) {
-				sum += Math.abs(sel[i].x - sel[i+1].x)+ Math.abs(sel[i].y - sel[i+1].y);
+			int sum =0;
+			for (int i = 0; i < sel.length-1; i++) {
+				sum += Math.abs(sel[i].x - sel[i+1].x) + Math.abs(sel[i].y - sel[i+1].y);
 			}
-			Ans = Math.min(Ans, c+h+sum);
+			Min = Math.min(sum+cul+doch, Min);
+			
 			return;
 		}
-		
-		for (int i = 0; i < cus.length; i++) {
-			if(v[i] == false) {
+
+		for (int i = 0; i < pos.length; i++) {
+			if(!v[i]) {
 				v[i] = true;
-				sel[k] = cus[i];
-				DFS(cus, sel, v, k+1, com, home);
+				sel[k] = pos[i];//[집1, -, -, -, -], [true,f,f,f,f]
+				DFS(pos,company,home,sel,k+1,v);
 				v[i] = false;
 			}
 		}
-		
 	}
 }
