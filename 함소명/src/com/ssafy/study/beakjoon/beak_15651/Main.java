@@ -20,6 +20,7 @@ public class Main {
 		int M = Integer.parseInt(st.nextToken());
 
 		recursive(0, new int[M]);
+		bw.flush(); // 남아있는 데이터 모두 출력
 		bw.close();
 	}
 
@@ -32,8 +33,7 @@ public class Main {
 				bw.write(M[i] + " ");
 			}
 			bw.newLine();
-			bw.flush(); // 남아있는 데이터 모두 출력
-
+		
 			return;
 		}
 

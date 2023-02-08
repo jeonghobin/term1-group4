@@ -18,26 +18,29 @@ public class Main {
 
 	// k= index
 	// b 중복 트리 막기
-	public static void recursive(int k, int[] M, boolean[] b) {
-		if (k == M.length) {
+	public static void recursive( int k, int[] sel, boolean[] v) {
+		if (k ==sel.length) {
 			k = 0;
 
-			for (int i : M) {
+			for (int i : sel) {
 				System.out.print(i + " ");
 			}
 			System.out.println();
 			return;
 		}
 
-		for (int i = 0; i < b.length; i++) {
-			if (b[i] == false) {
-				b[i] = true;
-				M[k] = i + 1;
+		for (int i = 0; i < v.length; i++) {
+			
+			if (v[i] == false) {
+				v[i] = true;
+				sel[k] = i + 1;
 
-				recursive(k + 1, M, b);
-				
-				b[i] = false; 
+				recursive(k + 1, sel, v);
+				for (int j = i+1; j < v.length; j++) {
+					v[j] = false; 
+				}
 			}
+			
 		}
 		
 
