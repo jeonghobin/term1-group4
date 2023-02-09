@@ -23,27 +23,24 @@ public class Main {
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());// 합을 구해야 하는 횟수
 
-		int[] arr = new int[N];
+		int[] arr = new int[N+1];
 		st = new StringTokenizer(br.readLine());
-		for (int i = 0; i < N; i++) {
-			if (i > 0)
-				arr[i] = Integer.parseInt(st.nextToken()) + arr[i - 1];
-			else
-				arr[i] = Integer.parseInt(st.nextToken());
+
+		arr[0] = 0;
+		for (int i = 1; i <= N; i++) {
+			arr[i] = Integer.parseInt(st.nextToken()) + arr[i - 1];
 		}
-//[5,9,12,14,15] -> 2, 4 -> 14-5
+		// [0,5,9,12,14,15] -> 2, 4 -> 14-5
 		// 셋째 줄부터 M개의 줄에는 합을 구해야 하는 구간 i와 j
-		int idx = 0;
-		for (int i = 0; i < M; i++) {
+
+		for (int i = 1; i <= M; i++) {
 			st = new StringTokenizer(br.readLine());
-			if (i == 0)
-				idx = arr[Integer.parseInt(st.nextToken()) - 1];
-			else
-				idx = arr[Integer.parseInt(st.nextToken()) - 2];
-			int jdx = arr[Integer.parseInt(st.nextToken()) - 1];
+			int idx = arr[Integer.parseInt(st.nextToken())-1];
+			int jdx = arr[Integer.parseInt(st.nextToken())];
 			int toSum = jdx - idx;
 			bw.write(String.valueOf(toSum));
 			bw.newLine();
+			//시간초과
 //			sum(arr, Integer.parseInt(st.nextToken())-1, Integer.parseInt(st.nextToken())-1, 0);
 		}
 

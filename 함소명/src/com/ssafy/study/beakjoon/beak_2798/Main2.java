@@ -3,7 +3,7 @@ package com.ssafy.study.beakjoon.beak_2798;
 import java.util.Arrays;
 import java.util.Scanner;
 
-//구간 합 구하기 4
+//블랙잭
 //카드의 합이 21을 넘지 않는 한도 내에서
 //3장의 카드를 골라야 한다
 public class Main2 {
