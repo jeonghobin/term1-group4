@@ -41,11 +41,13 @@ public class D3_5215 {
 			}
 
 			DFS(ig, 0, 0, 0);
+			DFS2(ig, new boolean[ig.length], 0, 0, 0);
 			System.out.println("#" + test_case + " " + max);
 
 		}
 	}
 
+	// 조합
 	public static void DFS(Ingret[] arr, int k, int sumCnt, int sumCal) {
 		if (sumCal > toCal)
 			return;
@@ -56,6 +58,27 @@ public class D3_5215 {
 		}
 
 		DFS(arr, k + 1, sumCnt + arr[k].cnt, sumCal + arr[k].cal);
-		DFS(arr, k+1, sumCnt, sumCal);
+		DFS(arr, k + 1, sumCnt, sumCal);
 	}
+
+	// 부분집합
+	public static void DFS2(Ingret[] arr, boolean[] sel, int idx, int sumCnt, int sumCal) {
+		if (sumCal > toCal)
+			return;
+
+		if (idx == arr.length) {
+			for (int i  = 0; i < sel.length; i++) {
+				if (sel[i])
+					max = Math.max(sumCnt, max);
+			}
+			return;
+		}
+
+		sel[idx] = true;
+		DFS2(arr, sel, idx + 1, sumCnt + arr[idx].cnt, sumCal + arr[idx].cal);
+		sel[idx] = false;
+		DFS2(arr, sel, idx + 1, sumCnt, sumCal);
+	}
+
+
 }
