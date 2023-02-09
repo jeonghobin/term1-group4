@@ -11,7 +11,9 @@ import java.util.StringTokenizer;
 // 
 public class Main {
 
-	static String[] arr = { "A", "C", "G", "T" };
+	static char[] arr = { 'A', 'C', 'G', 'T' };
+	static int[] copylimit = new int[4];
+	static 	int[] limit = new int[4];
 	static int totalCnt;
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
@@ -20,38 +22,84 @@ public class Main {
 		int S = Integer.parseInt(st.nextToken());// DNA 문자열 길이 |S|
 		int P = Integer.parseInt(st.nextToken());// 사용할 부분문자열의 길이 |P|
 
-		String[] str = new String[S];
-		String pw = br.readLine();
-		for (int i = 0; i < S; i++) {
-			str[i] = String.valueOf(pw.charAt(i));
-		}
+		String DNA = br.readLine();
 
-		int[] limit = new int[4];// 사용할 문자의 최소 개수
 		st = new StringTokenizer(br.readLine());
 		for (int i = 0; i < 4; i++) {
 			limit[i] = Integer.parseInt(st.nextToken());
 		}
+		
+		//처음 문자열 문자 개수 저장
+		for (int i = 0; i < P; i++) {
+			add(DNA.charAt(i));
+		}
+		
+		boolean check = true;
+		for (int j = 0; j < 4; j++) {
+			if (copylimit[j] < limit[j])
+				check = false;
+		}
 
-		int start = 0;
-		while (start+P < S) {
-			int[] copylimit = limit;
+		if (check())
+			totalCnt++;
+		
+
+		for (int i = P; i< S; i++) { // 처음~새로 탐색되는 문자
+			int start = i - P;
+			remove(DNA.charAt(start));
+			add(DNA.charAt(i));
 			
-			for (int i = start; i < start+P; i++) {
-				if("A".equals(str[i])) copylimit[0]--;
-				if("C".equals(str[i])) copylimit[1]--;
-				if("G".equals(str[i])) copylimit[2]--;
-				if("T".equals(str[i])) copylimit[3]--;
-			}
-			
-			int sum = Arrays.stream(copylimit).sum();
-			
-			if(sum==0) totalCnt++;
-			
-			start++;
+
+			if (check())
+				totalCnt++;
 		}
 		
 		System.out.println(totalCnt);
-		
+	}
+
+	public static Boolean check() {
+		boolean check = true;
+		for (int j = 0; j < 4; j++) {
+			if (copylimit[j] < limit[j])
+				check = false;
+		}
+		return check;
+	}
+	
+	// 추가
+	public static void add(char c) {
+		switch (c) {
+		case 'A':
+			copylimit[0]++;
+			break;
+		case 'C':
+			copylimit[1]++;
+			break;
+		case 'G':
+			copylimit[2]++;
+			break;
+		case 'T':
+			copylimit[3]++;
+			break;
+		}
+	}
+
+	// 제거
+	public static void remove(char c) {
+		switch (c) {
+		case 'A':
+			copylimit[0]--;
+			break;
+		case 'C':
+			copylimit[1]--;
+			break;
+		case 'G':
+			copylimit[2]--;
+			break;
+		case 'T':
+			copylimit[3]--;
+			break;
+		}
 	}
 
 }
