@@ -14,13 +14,9 @@ public class Main {
 		double limit = Math.pow(10, N);
 		double start = Math.pow(10, N - 1);
 
-		// 1의 자리 소수
-		int[] arr = { 1, 2, 3, 5, 7, 8, 9 };
+		int[] sosu = {2, 3, 5, 7};
 
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(isSosu(arr[i]));
-		}
-		
+
 
 
 	}
