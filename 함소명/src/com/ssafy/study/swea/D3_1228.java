@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-
+//요세푸스 문제
 public class D3_1228 {
 
 	public static void main(String[] args) throws NumberFormatException, IOException {

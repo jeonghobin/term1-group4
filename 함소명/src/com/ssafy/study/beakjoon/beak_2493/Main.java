@@ -22,33 +22,31 @@ public class Main {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		int N = Integer.parseInt(br.readLine());
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		Stack<Integer> stack = new Stack<Integer>();
-		for (int i = 0; i < N; i++) {
-			stack.push(Integer.parseInt(st.nextToken()));
-		}
-
-
-		// 9-5 5-7 : max 값과 비교해 양수이면 수신, 음수이면 수신되지 않음.
-		// 7-4
+		Stack<int[]> stack = new Stack<>();
 		int[] answer = new int[N];
-		
-		int max = stack.peek();
-		int maxIdx = 0;
-		int idx = 1;
-		
-		//max는 남겨
-		while (stack.size() > 1) {
-			int first = stack.pop();
-			int second = stack.peek();
-			if(first < second) {
-				stack.pop();
-				
-			}else {
-				stack.push(first);
+
+		for (int i = 1; i <= N; i++) {
+			int n = Integer.parseInt(st.nextToken());
+
+			while (!stack.isEmpty()) {
+				//앞이 n 보다 크면 수신
+				if(stack.peek()[0] > n) {
+					//수신
+					answer[i - 1] = stack.peek()[1];
+					break;
+				}else {
+					//수신X
+					//더 작으면 어차피 쓸모 없음.
+					answer[i - 1] = 0;
+					stack.pop();
+//					break;
+				}
 			}
 
+			if (stack.isEmpty())
+				answer[i - 1] = 0;
 
-			idx++;
+			stack.push(new int[] { n, i });
 		}
 
 		for (int i = 0; i < answer.length; i++) {
