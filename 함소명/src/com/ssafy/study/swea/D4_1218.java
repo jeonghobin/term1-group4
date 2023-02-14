@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Stack;
 
-//
+//괄호 짝짓기
 public class D4_1218 {
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		for (int test_case = 1; test_case <= 1; test_case++) {
+		for (int test_case = 1; test_case <= 10; test_case++) {
 			int N = Integer.parseInt(br.readLine());
 			String str = br.readLine();
 
@@ -28,15 +28,15 @@ public class D4_1218 {
 					stack.push(ch);
 					break;
 				case ')':
-					if (stack.peek() == '(') {
+					if (stack.peek() == '(')
 						stack.pop();
-					}else
+					else
 						v = false;
 					break;
 				case ']':
-					if (stack.peek() == '[') {
+					if (stack.peek() == '[')
 						stack.pop();
-					}else
+					else
 						v = false;
 					break;
 				case '}':
@@ -52,8 +52,7 @@ public class D4_1218 {
 						v = false;
 					break;
 				}
-
-//			System.out.println(stack);
+//            System.out.println(stack);
 			}
 
 			if (stack.isEmpty() && v) {
@@ -63,5 +62,4 @@ public class D4_1218 {
 		}
 
 	}
-
 }
