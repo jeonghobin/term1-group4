@@ -1,8 +1,5 @@
 package com.ssafy.study.beakjoon.beak_2023;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 //신기한 소수

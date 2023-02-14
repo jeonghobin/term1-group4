@@ -8,8 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
-//다시, 달팽이
+//배열 돌리기1
 public class Main {
+
+	static int[] dr = { 1, 0, -1, 0 };
+	static int[] dc = { 0, 1, 0, -1 };
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -25,41 +28,34 @@ public class Main {
 				arr[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
-		
-		int temp;
-		int prev = 0;
 
-		for (int round = 0; round < Math.min(N, M) / 2; round++) {
-			for (int Rotation = 0; Rotation < R; Rotation++) {
-				int row = round - 1;
-				int col = round;
-				prev = arr[row + 1][col + 1];
+		int min = Math.min(N, M);
+		// R만큼 회전
+		for (int rot = 0; rot < R; rot++) {
+			for (int cur = 0; cur < min / 2; cur++) {// 최대 껍질 수
+				int r = cur;
+				int c = cur;
+				int idx = 0;// 방향 돌리기
+				int first = arr[r][c];// 처음 값 저장
 
-				int num = 0;
-				int direction = 1;
-				for (int xxx = 0; xxx < 2; xxx++) {
+				while (idx < 4) {
+					int dx = r + dr[idx];
+					int dy = c + dc[idx];
 
-					for (int i = 0; i < N - round * 2 - num; i++) {
-						row += direction;
+					if (dx < cur || dx >= N - cur || dy < cur || dy >= M - cur) {
+						idx++;
+					} else {
+						int temp = arr[dx][dy];
+						arr[dx][dy] = first;
+						first = temp;
 
-						temp = arr[row][col];
-						arr[row][col] = prev;
-						prev = temp;
+						r = dx;
+						c = dy;
 					}
-
-					num++;
-
-					for (int i = 0; i < M - round * 2 - num; i++) {
-						col += direction;
-
-						temp = arr[row][col];
-						arr[row][col] = prev;
-						prev = temp;
-					}
-
-					direction *= -1;
 
 				}
+				// 배열 길이가 작아지면 끝자리에 다시 들어감.
+				arr[cur + 1][cur] = first;
 			}
 		}
 
@@ -71,5 +67,4 @@ public class Main {
 		}
 
 	}
-
 }
