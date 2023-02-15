@@ -64,3 +64,68 @@ public class Swea_7699 {
         System.out.println(sb);
     }
 }
+//
+//public class Solution {
+//
+//    static int[][] data;
+//    static int R, C, max;
+//    static int[] dx = {0,1,0,-1};
+//    static int[] dy = {1,0,-1,0};
+//    static int[] count;
+//
+//    public static void recursive(int x, int y, int cnt) {
+//
+//        max = Math.max(max, cnt);
+//
+//        if(cnt >= 26) return;
+//
+//        for (int i = 0; i < 4; i++) {
+//            int nx = x + dx[i];
+//            int ny = y + dy[i];
+//            if(nx >= 0 && nx < R && ny >= 0 && ny < C) {
+//                if(count[data[nx][ny]] == 0) {
+//                    count[data[nx][ny]] = 1;
+//                    recursive(nx , ny, cnt + 1);
+//                    count[data[nx][ny]] = 0;
+//                }
+//            }
+//        }
+//
+//
+//
+//    }
+//
+//    public static void main(String[] args) throws Exception {
+//
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        StringTokenizer st = new StringTokenizer(br.readLine());
+//        StringBuilder sb = new StringBuilder();
+//        int N = Integer.parseInt(st.nextToken());
+//        for (int t = 1; t < N + 1; t++) {
+//
+//            sb.append("#").append(t).append(" ");
+//
+//            st = new StringTokenizer(br.readLine());
+//
+//            R = Integer.parseInt(st.nextToken());
+//            C = Integer.parseInt(st.nextToken());
+//
+//            data = new int[R][C];
+//            count = new int[91];
+//
+//            for (int i = 0; i < R; i++) {
+//                String a = br.readLine();
+//                for (int j = 0; j < C; j++) {
+//                    data[i][j] = a.charAt(j);
+//                }
+//            }
+//
+//            count[data[0][0]] = 1;
+//            max = -1;
+//            recursive(0,0,1);
+//            sb.append(max).append("\n");
+//        }
+//        System.out.println(sb);
+//    }
+//
+//}
