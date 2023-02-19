@@ -25,16 +25,16 @@ public class D3_9229 {
 				snack[i] = sc.nextInt();
 			}
 
-			Rcursive(snack, new boolean[2], 0, 0, 0);
+			Rcursive(snack, 0, 0, 0);
 
 			System.out.println("#" + test_case + " " + max);
 		}
 
 	}
 
-	public static void Rcursive(int[] arr, boolean[] sel, int k, int i, int weight) {
+	public static void Rcursive(int[] arr, int k, int i, int weight) {
 
-		if (sel.length == k) {
+		if (2 == k) {
 			if (weight > M)
 				return;
 
@@ -42,12 +42,8 @@ public class D3_9229 {
 			return;
 		}
 
-		for (int j = 0; j < arr.length; j++) {
-//			if (!sel[k]) {
-//				sel[k] = true;
-				Rcursive(arr, sel, k + 1, j + 1, weight + arr[j]);
-//				sel[k] = false;
-//			}
+		for (int j = i; j < arr.length; j++) {
+				Rcursive(arr,k+1, j+1, weight + arr[j]);
 		}
 
 	}

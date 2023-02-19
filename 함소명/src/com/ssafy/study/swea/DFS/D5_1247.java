@@ -1,4 +1,4 @@
-package com.ssafy.study.swea;
+package com.ssafy.study.swea.DFS;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
  * 고객의 위치는 이차원 정수 좌표 (x, y) 거리는
  * |x1-x2| + |y1-y2|으로 계산 총 이동거리가 가장 짧은 경로
  *
- * 순열
+ * 순열+DFS
  */
 class Position {
 	int x, y;

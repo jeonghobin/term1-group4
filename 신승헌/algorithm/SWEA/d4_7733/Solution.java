@@ -56,14 +56,6 @@ public class Solution {
 				}
 			}
 
-			for (int j = 0; j < args.length; j++) {
-				for (int k = 0; k < args.length; k++) {
-					if (map[j][k] != 0) {
-						bfs(j, k);
-					}
-				}
-			}
-
 			System.out.println("#" + test_case + " " + answer);
 
 		} // [E] test_case
