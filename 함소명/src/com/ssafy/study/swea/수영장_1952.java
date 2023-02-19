@@ -31,6 +31,7 @@ public class 수영장_1952 {
 			for (int i = 0; i < 12; i++) {
 				month[i] = Integer.parseInt(st.nextToken());
 			}
+			
 			check(0, 0);
 			System.out.println("#" + test + " " + min);
 		}

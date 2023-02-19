@@ -1,4 +1,4 @@
-package com.ssafy.study.beakjoon.beak_17478;
+package com.ssafy.study.beakjoon.Recursion.beak_17478;
 
 import java.io.IOException;
 import java.util.Scanner;
