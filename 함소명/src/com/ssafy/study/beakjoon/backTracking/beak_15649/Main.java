@@ -1,4 +1,4 @@
-package com.ssafy.study.beakjoon.beak_15650;
+package com.ssafy.study.beakjoon.backTracking.beak_15649;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,36 +13,30 @@ public class Main {
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
 
-		recursive(0, new int[M], new boolean[N]);
+		recursive(N, 0, new int[M], new boolean[N]);
 	}
 
 	// k= index
 	// b 중복 트리 막기
-	public static void recursive( int k, int[] sel, boolean[] v) {
-		if (k ==sel.length) {
+	public static void recursive(int N, int k, int[] M, boolean[] b) {
+		if (k == M.length) {
 			k = 0;
 
-			for (int i : sel) {
+			for (int i : M) {
 				System.out.print(i + " ");
 			}
 			System.out.println();
 			return;
 		}
 
-		for (int i = 0; i < v.length; i++) {
-			
-			if (v[i] == false) {
-				v[i] = true;
-				sel[k] = i + 1;
-
-				recursive(k + 1, sel, v);
-				for (int j = i+1; j < v.length; j++) {
-					v[j] = false; 
-				}
+		for (int i = 0; i < N; i++) {
+			if (b[i] == false) {
+				b[i] = true;
+				M[k] = i + 1;
+				recursive(N, k + 1, M, b);
+				b[i] = false;
 			}
-			
 		}
-		
 
 	}
 }

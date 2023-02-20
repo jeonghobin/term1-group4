@@ -1,9 +1,9 @@
-package com.ssafy.study.swea;
+package com.ssafy.study.swea.D1_D2;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class D2_1954 {
+public class D2_1954_Re {
 
 	static int[] rt = { 0, 1, 0, -1 };// 행
 	static int[] ct = { 1, 0, -1, 0 };// 열

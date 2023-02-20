@@ -1,10 +1,9 @@
-package com.ssafy.study.beakjoon.beak_2630;
+package com.ssafy.study.beakjoon.cut.beak_1992;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.StringTokenizer;
 
 /*
  * 쿼드트리
