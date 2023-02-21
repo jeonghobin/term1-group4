@@ -8,7 +8,10 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.StringTokenizer;
 
-//중복 순열
+/*
+ * N과 M (3)
+ * 중복 순열
+ */
 public class Main {
 	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 	static int N;

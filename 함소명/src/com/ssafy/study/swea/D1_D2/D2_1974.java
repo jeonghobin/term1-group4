@@ -1,6 +1,5 @@
 package com.ssafy.study.swea.D1_D2;
 
-import java.lang.reflect.Array;
 import java.util.Scanner;
 
 //스도쿠 검증
