@@ -1,4 +1,4 @@
-package com.ssafy.study.beakjoon.beak_1012;
+package com.ssafy.study.beakjoon.DFS_BFS.beak_1012;
 
 import java.io.BufferedReader;
 import java.io.IOException;

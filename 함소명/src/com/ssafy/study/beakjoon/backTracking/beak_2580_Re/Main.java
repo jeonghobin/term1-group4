@@ -56,6 +56,7 @@ public class Main {
 				}
 				System.out.println();
 			}
+			System.exit(0);
 			return;
 		}
 
@@ -66,7 +67,7 @@ public class Main {
 			if (check(x, y, i)) {
 				map[x][y] = i;
 				solve(k + 1);
-				map[x][y] = 0;//왜??
+				map[x][y] = 0;//왜?? 끝까지 가서 아니면 전 것들을 다 돌린다.
 			}
 		}
 	}
