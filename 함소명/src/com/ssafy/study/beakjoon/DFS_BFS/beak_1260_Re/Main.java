@@ -3,6 +3,7 @@ package com.ssafy.study.beakjoon.DFS_BFS.beak_1260_Re;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
+import java.util.Stack;
 
 /*
  * DFS와 BFS
@@ -12,28 +13,31 @@ import java.util.Scanner;
  */
 public class Main {
 	static int[][] arr;
+	static int N;
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();// 정점의 개수
+		N = sc.nextInt();// 정점의 개수
 		int M = sc.nextInt();// 간선의 개수
 		int V = sc.nextInt();// 정점 시작 번호
 
-		//인접행렬 생성
-        arr = new int[N+1][N+1];
-        for(int i = 0; i < M; i++) {
-            int a = sc.nextInt();
-            int b = sc.nextInt();
-            arr[a][b] = 1;
-            arr[b][a] = 1;
-        }
+		// 인접행렬 생성
+		arr = new int[N + 1][N + 1];
+		for (int i = 0; i < M; i++) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			arr[a][b] = 1;
+			arr[b][a] = 1;
+		}
 
-        dfs(new boolean[N + 1],V);
+		dfs(new boolean[N + 1], V);
 
-        System.out.println();
+		System.out.println();
 
-        bfs(new boolean[N + 1],V);
-    }
+		bfs(new boolean[N + 1], V);
+	}
+
+	//들어오면 처음 들어온 자식노드를 바로 반영해줘야해서 스택음 못씀.
     //깊이우선탐색(재귀)
     public static void dfs(boolean[] visited, int V) {
         visited[V] = true;
@@ -44,29 +48,28 @@ public class Main {
         }
         for(int j = 1; j < arr.length; j++) {
             //연결은 되어있는데, 방문하지 않았다면 재귀
-            if(arr[V][j] == 1 && visited[j] == false) {
+            if(arr[V][j] == 1 && !visited[j]) {
                 dfs(visited, j);
             }
         }
     }
 
-    //너비우선탐색(큐)
-    public static void bfs(boolean[] visited, int V) {
-        Queue<Integer> que = new LinkedList<Integer>();
+	private static void bfs(boolean[] v, int V) {
+		Queue<Integer> Q = new LinkedList<Integer>();
+		Q.offer(V);
+		v[V] = true;
 
-        que.add(V);
-        visited[V] = true;
-        System.out.print(V + " ");
+		while (!Q.isEmpty()) {
+			int num = Q.poll();
+			System.out.print(num+" ");
 
-        while(!que.isEmpty()) {
-            int temp = que.poll();
-            for(int i = 1; i < arr.length; i++) {
-                if(arr[temp][i] == 1 && visited[i] == false) {
-                    que.add(i);
-                    visited[i] = true;
-                    System.out.print(i + " ");
-                }
-            }
-        }
-    }
+			//해당 열 쭉 체크
+			for (int i = 1; i < v.length; i++) {
+				if (arr[num][i] == 1 && !v[i]) {
+					v[i] = true;
+					Q.offer(i);
+				}
+			}
+		}
+	}
 }

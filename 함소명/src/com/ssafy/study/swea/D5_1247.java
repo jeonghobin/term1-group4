@@ -1,4 +1,4 @@
-package com.ssafy.study.swea.DFS;
+package com.ssafy.study.swea;
 
 import java.io.BufferedReader;
 import java.io.IOException;

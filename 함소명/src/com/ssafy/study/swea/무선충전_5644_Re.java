@@ -29,7 +29,6 @@ public class 무선충전_5644_Re {
 			this.cover = cover;
 			this.power = power;
 			
-			
 		}
 
 		@Override
