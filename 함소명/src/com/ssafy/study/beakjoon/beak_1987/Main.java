@@ -52,41 +52,35 @@ public class Main {
 			}
 		}
 
-//		DFS(0, 0, 1);
-		DFS(0, 0);
+//		DFS(0, 0);
+//		System.out.println(cnt);
 
-		System.out.println(cnt);
+		DFS(0, 0, 1);
+		System.out.println(max);
 	}
 
-
-	static int cnt;
-	private static void DFS(int r, int c) {
-		Stack<Position> stack = new Stack<>();
-		stack.push(new Position(r, c));
-		v[map[r][c] - 'A'] = true;
-		cnt++;
-
-		while (!stack.isEmpty()) {
-			System.out.println(stack);
-			Position Alpa = stack.pop();
-			
-			for (int i = 0; i < 4; i++) {
-				int dx = Alpa.r + dr[i];
-				int dy = Alpa.c + dc[i];
-
-				if (dx >= 0 && dx < R && dy >= 0 && dy < C && !v[map[dx][dy] - 'A']) {
-					v[map[dx][dy] - 'A'] = true;
-					stack.push(new Position(dx, dy));
-					cnt++;
-				}
-				
-			}
-			
-		}
-	}
+	/*
+	 * //스택 어떻게 사용? static int cnt;
+	 * 
+	 * private static void DFS(int r, int c) { Stack<Position> stack = new
+	 * Stack<>(); stack.push(new Position(r, c)); v[map[r][c] - 'A'] = true; cnt++;
+	 * 
+	 * while (!stack.isEmpty()) { System.out.println(stack); Position Alpa =
+	 * stack.pop();
+	 * 
+	 * for (int i = 0; i < 4; i++) { int dx = Alpa.r + dr[i]; int dy = Alpa.c +
+	 * dc[i];
+	 * 
+	 * if (dx >= 0 && dx < R && dy >= 0 && dy < C && !v[map[dx][dy] - 'A']) {
+	 * v[map[dx][dy] - 'A'] = true; stack.push(new Position(dx, dy)); cnt++; }
+	 * 
+	 * }
+	 * 
+	 * } }
+	 */
 
 	private static void DFS(int r, int c, int k) {
-		
+
 		max = Math.max(max, k);
 		v[map[r][c] - 'A'] = true;
 
@@ -98,7 +92,7 @@ public class Main {
 				DFS(dx, dy, k + 1);
 			}
 		}
-		
+
 		v[map[r][c] - 'A'] = false;
 	}
 
