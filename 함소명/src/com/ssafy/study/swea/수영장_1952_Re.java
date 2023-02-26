@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
 //1일 이용권 - 10원, 1달 이용권 - 40원 , 3달 이용권 - 100원, 1년 이용권 - 300원  
 //3달 이용권은 11월, 12월, 1윌 이나 12월, 1월, 2월 동안 사용하도록 구매할 수는 없다
 //각 이용권의 요금과 각 달의 이용 계획이 입력으로 주어질 때,가장 적은 비용으로 수영장을 이용할 수 있는 방법을 찾고 그 비용을 출력
-public class 수영장_1952 {
+public class 수영장_1952_Re {
 	static int[] month = new int[12];
 	static int min;
 	static int[] fee = new int[4];

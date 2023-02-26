@@ -1,4 +1,4 @@
-package com.ssafy.study.beakjoon.beak_2567;
+package com.ssafy.study.beakjoon.색종이_2567;
 
 import java.io.BufferedReader;
 import java.io.IOException;
