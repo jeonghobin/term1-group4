@@ -1,4 +1,4 @@
-package com.ssafy.study.beakjoon.cut.beak_1074;
+package com.ssafy.study.beakjoon.분할.Z_1074_Re;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,6 @@ import java.util.StringTokenizer;
 /*
  * Z
  * 분할로 문제 풀기.
- * 다시
  */
 public class Main {
 	static int cnt = 0;// cnt -> 앞쪽 없애기. 없앤 숫자중 가장 큰 숫자

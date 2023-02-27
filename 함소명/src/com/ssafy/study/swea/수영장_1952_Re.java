@@ -36,7 +36,6 @@ public class 수영장_1952_Re {
 			System.out.println("#" + test + " " + min);
 		}
 	}
-
 	static void check(int n, int cost) {
 		if (n < 12) {
 			if (month[n] != 0) {
