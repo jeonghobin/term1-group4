@@ -1,4 +1,4 @@
-package com.ssafy.study.beakjoon.beak_2839;
+package com.ssafy.study.beakjoon.설탕배달_2839_Re;
 
 import java.util.Scanner;
 

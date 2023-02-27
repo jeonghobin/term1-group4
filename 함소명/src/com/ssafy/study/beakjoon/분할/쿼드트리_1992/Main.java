@@ -1,4 +1,4 @@
-package com.ssafy.study.beakjoon.cut.beak_1992;
+package com.ssafy.study.beakjoon.분할.쿼드트리_1992;
 
 
 import java.io.BufferedReader;
