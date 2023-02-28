@@ -3,7 +3,6 @@ package com.ssafy.study.beakjoon.beak_2805;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -23,27 +22,9 @@ public class Main {
 		for (int i = 0; i < arr.length; i++) {
 			arr[i] = Integer.parseInt(Trees.nextToken());
 		}
-		Arrays.sort(arr);
 
-		int max = arr[N - 1];// 가장 큰 나무의 높이
-		int min = 0;
 
-		while (min < max) {
-			int mid = (max + min) / 2;// 중간값 = 나무를 자른 위치
-			long sum = 0;
-
-			for (int tree : arr) {
-				if (tree - mid > 0)
-					sum += tree - mid;
-			}
-
-			if (sum < M)// 합이 더 낮다는 것은 자르는 위치가 높다는 의미로 낮춰야함.
-				max = mid;
-			else
-				min = mid + 1;// 합이 더 크다는 것은 자르는 위치가 낮다는 더 높게 잘라야함.
-		}
-
-		System.out.println(min - 1);
+//		System.out.println(min - 1);
 
 	}
 }
