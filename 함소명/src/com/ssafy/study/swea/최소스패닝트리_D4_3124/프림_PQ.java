@@ -1,19 +1,13 @@
 package com.ssafy.study.swea.최소스패닝트리_D4_3124;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
-
+import java.io.*;
+import java.util.*;
 
 public class 프림_PQ {
 	static int V;
 	static ArrayList<Vertex>[] adj;
 
-	static class Vertex implements Comparable<Vertex>{
+	static class Vertex implements Comparable<Vertex> {
 		int e, c;
 
 		Vertex(int e, int c) {
@@ -31,7 +25,7 @@ public class 프림_PQ {
 			// TODO Auto-generated method stub
 			return Integer.compare(this.c, o.c);
 		}
-		
+
 	}
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
@@ -43,7 +37,7 @@ public class 프림_PQ {
 			int E = Integer.parseInt(st.nextToken());
 
 			// 인접리스트
-			adj = new ArrayList[V+1];
+			adj = new ArrayList[V + 1];
 			for (int i = 1; i <= V; i++) {
 				adj[i] = new ArrayList<Vertex>();
 			}
@@ -58,7 +52,7 @@ public class 프림_PQ {
 				adj[b].add(new Vertex(a, c));
 			}
 
-			System.out.println("#"+test_case+" "+primPQ(new int[V + 1], new boolean[V + 1]));
+			System.out.println("#" + test_case + " " + primPQ(new int[V + 1], new boolean[V + 1]));
 
 		}
 
@@ -71,14 +65,14 @@ public class 프림_PQ {
 		/***** 정점배열의 값을 무한대로 설정 *****/
 		Arrays.fill(Node, Integer.MAX_VALUE);
 		Node[0] = 0;
-		
-		long sum  = 0;
+
+		long sum = 0;
 		PriorityQueue<Vertex> Q = new PriorityQueue<>();
 		Q.add(new Vertex(1, 0));
-		
+
 		while (!Q.isEmpty()) {
 			Vertex p = Q.poll();
-			
+
 			if (!v[p.e]) {
 				v[p.e] = true;
 
@@ -93,7 +87,7 @@ public class 프림_PQ {
 				}
 			}
 		}
-		
+		System.out.println(Arrays.toString(Node));
 		return sum;
 	}
 
