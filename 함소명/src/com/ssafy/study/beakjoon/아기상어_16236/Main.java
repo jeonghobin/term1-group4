@@ -1,6 +1,7 @@
 package com.ssafy.study.beakjoon.아기상어_16236;
 
-import java.util.*;
+import java.util.PriorityQueue;
+import java.util.Scanner;
 
 public class Main {
 	static int[] dy = { -1, 0, 0, 1 };

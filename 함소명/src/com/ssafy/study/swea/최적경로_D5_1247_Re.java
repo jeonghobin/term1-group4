@@ -24,7 +24,7 @@ class Position {
 	}
 }
 
-public class D5_1247 {
+public class 최적경로_D5_1247_Re {
 
 	static int Min;
 	

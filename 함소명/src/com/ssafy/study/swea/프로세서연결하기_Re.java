@@ -3,7 +3,7 @@ package com.ssafy.study.swea;
 import java.io.*;
 import java.util.*;
 
-public class 프로세서연결하기 {
+public class 프로세서연결하기_Re {
 	static int N, min;
 	static int[][] map;
 	static List<Point> list;
