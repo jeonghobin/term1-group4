@@ -1,0 +1,92 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    
+	static int N;
+	static boolean[] visited,visited2;
+	static int[] out=new int[5];
+	static ArrayList<int[]>[] arr;
+	static int Ans=Integer.MIN_VALUE;
+	public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st;
+        N = Integer.parseInt(br.readLine());
+        arr = new ArrayList[5];
+        visited2 = new boolean[5];
+        
+        for(int i=0;i<5;i++) {
+        	arr[i] = new ArrayList<>();
+        }
+        for(int i=0;i<N;i++) {
+        	st =new StringTokenizer(br.readLine());
+        	for(int j=0;j<5;j++) {
+        		int a = Integer.parseInt(st.nextToken());
+        		arr[j].add(new int[] {i,a});
+        	}
+        }
+        for(int j=0;j<5;j++) {
+        	Collections.sort(arr[j],new Comparator<int[]>() {
+        		@Override
+        		public int compare(int[] o1, int[] o2) {
+        			// TODO Auto-generated method stub
+        			return o2[1]-o1[1];
+        		}
+			});
+        }
+        perm(5,5,0);
+        System.out.println(Ans);
+        
+    }
+	private static void perm(int n, int r, int cnt) {
+		if(cnt==r) {
+			int sum=0;
+	        visited = new boolean[N];
+	        for(int i=0;i<5;i++) {
+	        	for(int j=0;j<arr[out[i]].size();j++) {
+	        		int[] a = arr[out[i]].get(j);
+	        		if(a[1]==0) {
+	        			break;
+	        		}
+	        		if(!visited[a[0]]) {
+	        			visited[a[0]] =true;
+	        			sum+=a[1];
+	        			break;
+	        		}
+	        	}
+//	        	for(int j=arr[out[i]].size()-1;j>=0;j--) {
+//	        		int[] a = arr[out[i]].get(j);
+//	        		if(a[1]==0) {
+//	        			break;
+//	        		}
+//	        		if(!visited[a[0]]) {
+//	        			visited[a[0]] =true;
+//	        			sum+=a[1];
+//	        			break;
+//	        		}
+//	        	}
+	        }
+	        Ans = Math.max(sum, Ans);
+			return;
+		}
+		for(int i=0;i<5;i++) {
+			if(visited2[i])continue;
+			visited2[i] = true;
+			out[cnt]=i;
+			perm(n,r,cnt+1);
+			visited2[i]=false;
+		}
+		
+	}
+
+	
+
+
+	
+		
+	
+
+	
+
+}
