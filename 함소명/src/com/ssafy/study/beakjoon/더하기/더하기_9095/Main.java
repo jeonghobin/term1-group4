@@ -1,4 +1,4 @@
-package com.ssafy.study.beakjoon.더하기_9095;
+package com.ssafy.study.beakjoon.더하기.더하기_9095;
 
 import java.util.*;
 
