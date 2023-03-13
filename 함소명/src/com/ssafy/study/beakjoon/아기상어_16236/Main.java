@@ -1,113 +1,76 @@
 package com.ssafy.study.beakjoon.아기상어_16236;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.PriorityQueue;
+import java.util.Scanner;
 
-/*
- * 
- */
 public class Main {
-	static int N;
+	static int[] dy = { -1, 0, 0, 1 };
+	static int[] dx = { 0, -1, 1, 0 };
 	static int[][] map;
-	static Shark shark;
-	static ArrayList<Shark>[] fish;
-	static int eatFish;
 
-	static int[] dr = { 0, 0, -1, 1 };
-	static int[] dc = { -1, 1, 0, 0 };
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt();
 
-	static class Shark {
-		int r, c, Ssize, cnt;
-
-		public Shark(int r, int c, int ssize, int cnt) {
-			super();
-			this.r = r;
-			this.c = c;
-			this.Ssize = ssize;
-			this.cnt = cnt;
-		}
-
-		@Override
-		public String toString() {
-			return "Shark [r=" + r + ", c=" + c + ", Ssize=" + Ssize + ", cnt=" + cnt + "]";
-		}
-
-	}
-
-	public static void main(String[] args) throws NumberFormatException, IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		N = Integer.parseInt(br.readLine());
 		map = new int[N][N];
+		int[] cur = null;
 
-		fish = new ArrayList[7];// 1~6
-
-		for (int i = 0; i < N; i++) {
-			StringTokenizer st = new StringTokenizer(br.readLine());
+		for (int i = 0; i < N; i++)
 			for (int j = 0; j < N; j++) {
-				map[i][j] = Integer.parseInt(st.nextToken());
-
-				if (map[i][j] == 9)
-					shark = new Shark(i, j, 2, 0);
-				else if (map[i][j] != 0) // 왼쪽 위부터 들어감.
-					fish[map[i][j]].add(new Shark(i, j, map[i][j], 0));
-			}
-		}
-
-		// 아기 상어 최단거리 이동
-		moveShark();
-
-	}
-
-	private static void moveShark() {
-		Queue<Shark> Q = new LinkedList<Shark>();
-		
-		Q.offer(shark);
-
-		while (!Q.isEmpty()) {
-			Queue<Shark> fishs = new LinkedList<Shark>();
-			Shark shark = Q.poll();
-			// 상어가 먹을 수 있는 물고기 담기.
-
-			for (int i = 0; i < 4; i++) {
-				int dx = shark.r + dr[i];
-				int dy = shark.c + dc[i];
-
-				if (dx >= 0 && dy >= 0 && dx < N && dy < N) {
-
-					// 상어 이동 -> 0이나 자신과 크기가 같은 물고기는 밟고 이동할 수 있다.
-					if (map[dx][dy] == 0 || map[dx][dy] == shark.Ssize) {
-
-						Q.offer(new Shark(dx, dy, shark.Ssize, shark.cnt + 1));
-
-					} else if (map[dx][dy] < shark.Ssize) {// 자신보다 작은 물고기 먹기
-
-						// 상어가 먹을 수 있는 물고기 담기.
-						fishs.offer(new Shark(dx, dy, map[dx][dy], 0));
-					}
+				map[i][j] = sc.nextInt();
+				if (map[i][j] == 9) {
+					cur = new int[] { i, j };
+					map[i][j] = 0;
 				}
 			}
 
-			// 상어가 먹을 수 있는 물고기들 중, 왼쪽 위 부터 먹기.
-			if (!fishs.isEmpty()) {
-				int r = N;
-				int c = N;
-				for (Shark iseat : fishs) {
-					if (iseat.r < r)
-						r = iseat.r;
-					if (iseat.c < c)
-						c = iseat.c;
-					
+		int size = 2;
+		int eat = 0; // 먹은 물고기 수
+		int move = 0; // 움직인 총 거리
+
+		while (true) {
+			PriorityQueue<int[]> que = new PriorityQueue<>((o1, o2) -> o1[2] != o2[2] ? Integer.compare(o1[2], o2[2])
+					: (o1[0] != o2[0] ? Integer.compare(o1[0], o2[0]) : Integer.compare(o1[1], o2[1])));
+			boolean[][] visit = new boolean[N][N];
+
+			que.add(new int[] { cur[0], cur[1], 0 }); // y좌표, x좌표, 이동한 거리
+			visit[cur[0]][cur[1]] = true;
+
+			boolean ck = false; // 상어가 먹이를 먹었는지 체크할 변수
+
+			while (!que.isEmpty()) {
+				cur = que.poll();
+
+				if (map[cur[0]][cur[1]] != 0 && map[cur[0]][cur[1]] < size) { // 먹이가 있으면서 상어의 사이즈보다 작다면?
+					map[cur[0]][cur[1]] = 0; // 물고기를 제거
+					eat++;
+					move += cur[2]; // 움직인 거리를 총 움직인 거리에 추가
+					ck = true; // 먹이 먹었다고 체크
+					break;
 				}
 
-				// 만일 상어가 물고기를 자기 사이즈만큼 먹었다면 크기 +1 증가
+				for (int k = 0; k < 4; k++) {
+					int ny = cur[0] + dy[k];
+					int nx = cur[1] + dx[k];
 
+					if (ny < 0 || nx < 0 || nx >= N || ny >= N || visit[ny][nx] || map[ny][nx] > size)
+						continue;
+
+					que.add(new int[] { ny, nx, cur[2] + 1 });
+					visit[ny][nx] = true;
+				}
+			}
+
+			if (!ck) // 큐가 비워질 때까지 먹이를 먹은적이 없다면, 더 이상 먹은 물고기가 없으므로 탈출
+				break;
+
+			if (size == eat) { // 사이즈와 먹이를 먹은 수가 동일하다면 상어의 크기를 증가
+				size++;
+				eat = 0;
 			}
 		}
+
+		System.out.println(move);
 
 	}
 

@@ -1,15 +1,9 @@
 package com.ssafy.study.LSJ;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
-//최소 거리가 아닌 최소 연료!경로 가중치! DFS
+//최소 거리가 아닌 최소 연료!경로 가중치! DFS/Dijkstra
 public class 산악구조로봇 {
 	static int N;
 	static int[][] map;
@@ -69,8 +63,7 @@ public class 산악구조로봇 {
 
 			Dijkstra();
 
-			
-			System.out.println("#" + test_case + " " + Nodes[N-1][N-1]);
+			System.out.println("#" + test_case + " " + Nodes[N - 1][N - 1]);
 		}
 	}
 
@@ -84,9 +77,9 @@ public class 산악구조로봇 {
 			int r = p.r;
 			int c = p.c;
 
-			
-			if(v[r][c]) continue;
-			
+			if (v[r][c])
+				continue;
+
 			v[r][c] = true;
 
 			for (int i = 0; i < 4; i++) {
@@ -106,7 +99,7 @@ public class 산악구조로봇 {
 
 					// 이전에 왔던 연료소모량보다 적다면
 					if (Nodes[dx][dy] > Nodes[r][c] + addfuel) {// Dijkstra
-						
+
 						Nodes[dx][dy] = Nodes[r][c] + addfuel;// Dijkstra
 
 						Q.offer(new Point(dx, dy, Nodes[r][c] + addfuel));

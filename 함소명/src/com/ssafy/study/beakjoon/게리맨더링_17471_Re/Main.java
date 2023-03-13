@@ -1,100 +1,115 @@
 package com.ssafy.study.beakjoon.게리맨더링_17471_Re;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
-/*
- * Solution 보고 품
- * 다시 풀어보기
- */
 public class Main {
- 
-    static int N;
-    static int[] population, Node;
-    static ArrayList<Integer>[] adj;
-    static int min = Integer.MAX_VALUE;
-    static boolean[] visited;
- 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		N = Integer.parseInt(br.readLine());//구역 수
-        
-        population = new int[N + 1];
-        adj = new ArrayList[N + 1];
-    	StringTokenizer st = new StringTokenizer(br.readLine());
-        for(int i = 1; i <= N; i++) {
-            adj[i] = new ArrayList<>();
-            population[i] = Integer.parseInt(st.nextToken());//구역 인구
-        }
- 
-        for(int i = 1; i <= N; i++) {
-        	st = new StringTokenizer(br.readLine());
-            int num = Integer.parseInt(st.nextToken());
-            for(int j = 0; j < num; j++) {
-            	adj[i].add(Integer.parseInt(st.nextToken()));
-            }
-        }
- 
-        Node = new int[N + 1]; //각 지역구가 속한 선거구 저장. 1 or 2
-        select(1, new boolean[N+1]); //뽑을 수 있는 모든 지역구 뽑기
- 
-        if(min == Integer.MAX_VALUE) System.out.println("-1");
-        else System.out.println(min);
-    } 
- 
-    //부분집합 선거구 나누기
-    public static void select(int k, boolean[] sel) {
-        if(k == sel.length) { //모든 지역 다 뽑았다면
-            int area1 = 0;
-            int area2 = 0;
-            
-            for(int i = 1; i < sel.length; i++) {
-                if(Node[i] == 1) area1 += population[i];
-                else area2 += population[i];
-            }
-            
-            visited = new boolean [N + 1];
-            int link = 0; // 연결된 지역들의 개수를 셈.
-            for(int i = 1; i <= N; i++) {
-                if(!visited[i]) {
-                    bfs(i, Node[i]); 
-                    link++;
-                }
-            }
-            
-            //지역이 2개뤄 나눠졌고, 2지역안에서 서로 연결되어 있다면 최소값 계산
-            if(link == 2) min = Math.min(min, Math.abs(area1 - area2)); 
- 
-            return;
-        } 
- 
-        Node[k] = 1; //k지역 1번 선거구에 할당.
-        select(k + 1, sel);
- 
-        Node[k] = 2; //k지역 2번 선거구에 할당.
-        select(k + 1, sel);
-    }
- 
-    public static void bfs(int idx, int num) {
-        Queue<Integer> q = new LinkedList<>();
-        visited[idx] = true;
-        q.offer(idx);
- 
-        while(!q.isEmpty()) {
-            int current = q.poll();
-            
-            for(int i = 0; i < adj[current].size(); i++) {
-                int next = adj[current].get(i);
-                if(Node[next] == num && !visited[next]) {
-                    q.offer(next);
-                    visited[next] = true;
-                }
-            }
-        }
-    }
+	static int N, min;
+	static int[] area;
+	static ArrayList<Integer>[] adj;
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		N = Integer.parseInt(br.readLine());// 구역 개수
+		min = Integer.MAX_VALUE;
+
+		adj = new ArrayList[N + 1];
+		for (int i = 1; i <= N; i++) {
+			adj[i] = new ArrayList<>();
+		}
+
+		area = new int[N + 1];
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		// 지역에 인원 넣기
+		for (int i = 1; i <= N; i++) {
+			int population = Integer.parseInt(st.nextToken());
+			area[i] = population;
+
+			StringTokenizer st2 = new StringTokenizer(br.readLine());
+			int M = Integer.parseInt(st2.nextToken());// 인접한 구역의 수
+			// 인접한 지역
+			for (int j = 0; j < M; j++) {
+				adj[i].add(Integer.parseInt(st2.nextToken()));
+			}
+		}
+
+		// 선거구 2개로 나누기
+		// 순서 있이 뽑으니까 순열
+		// But -> 2개로 나눠야하는데 어떻게 나누지? 2개의 구역이니까 1, 2를 넣어 구분. 조합
+		recursive(new int[N + 1], 1);
+		if (min == Integer.MAX_VALUE)
+			System.out.println(-1);
+		else
+			System.out.println(min);
+	}
+
+	private static void recursive(int[] sel, int k) {
+		if (sel.length == k) {
+
+			int areaA = 0;// A구역 인구 수
+			int areaB = 0;
+			int cntA = 0;// A구역 구역 수
+			int cntB = 0;
+			int idxA = 0;// A구역이 있는 인덱스 번호
+			int idxB = 0;
+			for (int i = 1; i <= N; i++) {
+				if (sel[i] == 1) {
+					idxA = i;
+					cntA++;
+					areaA += area[i];
+				} else {
+					idxB = i;
+					cntB++;
+					areaB += area[i];
+				}
+			}
+
+			boolean isA = BFS(sel, 1, idxA, cntA);
+			boolean isB = BFS(sel, 2, idxB, cntB);
+
+			if (isA && isB) {
+				int cha = Math.abs(areaA - areaB);
+				min = Math.min(min, cha);
+			}
+
+			return;
+		}
+
+		sel[k] = 1;
+		recursive(sel, k + 1);
+		sel[k] = 2;
+		recursive(sel, k + 1);
+
+	}
+
+	private static boolean BFS(int[] sel, int area, int idx, int totalcnt) {
+		Queue<Integer> Q = new LinkedList<>();
+		boolean[] v = new boolean[N + 1];
+		Q.offer(idx);
+		v[idx] = true;
+
+		int cnt = 0;
+		while (!Q.isEmpty()) {
+			int p = Q.poll();
+
+			if (p == 0)
+				continue;
+
+			cnt++;
+
+			for (int i = 0; i < adj[p].size(); i++) {
+				int num = adj[p].get(i);
+				if (!v[num] && sel[num] == area) {
+					v[num] = true;
+					Q.offer(num);
+				}
+			}
+		}
+
+		if (cnt == totalcnt)
+			return true;
+		else
+			return false;
+	}
+
 }
