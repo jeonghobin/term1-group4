@@ -1,12 +1,7 @@
-package com.ssafy.study.beakjoon.backTracking.beak_15651;
+package com.ssafy.study.beakjoon.N과M.beak_15651;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 /*
  * N과 M (3)
@@ -27,7 +22,6 @@ public class Main {
 		bw.close();
 	}
 
-	// k= index
 	public static void recursive(int k, int[] M) throws IOException {
 		if (k == M.length) {
 			k = 0;
@@ -36,13 +30,12 @@ public class Main {
 				bw.write(M[i] + " ");
 			}
 			bw.newLine();
-		
+
 			return;
 		}
 
-		for (int i = 0; i < N; i++) {
-
-			M[k] = i + 1;
+		for (int i = 1; i <= N; i++) {
+			M[k] = i;
 			recursive(k + 1, M);
 		}
 
