@@ -1,4 +1,4 @@
-package com.ssafy.study.beakjoon.backTracking.beak_15649;
+package com.ssafy.study.beakjoon.N과M.beak_15649;
 
 import java.io.BufferedReader;
 import java.io.IOException;

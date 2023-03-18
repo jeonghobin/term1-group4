@@ -1,11 +1,11 @@
-package com.ssafy.study.beakjoon.backTracking.beak_15654;
+package com.ssafy.study.beakjoon.N과M.beak_15654;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
 /*
  * N과 M (5)
- * 순열
+ * 정렬 후 순열
  */
 public class Main {
 
