@@ -1,0 +1,67 @@
+import java.io.*;
+import java.util.*;
+class Point {
+		int e,c;
+
+		public Point(int e, int c) {
+			super();
+			this.e = e;
+			this.c = c;
+		}
+		
+	}
+public class Main {
+	static boolean[] visited;
+	static int[] dist;
+	static int N,M;
+	static ArrayList<Point>[] g;
+	public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st;
+        N = Integer.parseInt(br.readLine());
+        M = Integer.parseInt(br.readLine());
+        g = new ArrayList[N+1];
+        visited = new boolean[N+1];
+        dist = new int[N+1];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        for(int i=1;i<=N;i++) {
+        	g[i] = new ArrayList<>();
+        }
+        for(int j=0;j<M;j++) {
+        	st = new StringTokenizer(br.readLine());
+        	int a = Integer.parseInt(st.nextToken());
+        	int b = Integer.parseInt(st.nextToken());
+        	int c = Integer.parseInt(st.nextToken());
+        	g[a].add(new Point(b,c));
+        }
+        PriorityQueue<Point> pq = new PriorityQueue<>(new Comparator<Point>() {
+        	@Override
+        	public int compare(Point o1, Point o2) {
+        		// TODO Auto-generated method stub
+        		return o1.c-o2.c;
+        	}
+		});
+        st = new StringTokenizer(br.readLine());
+        int S = Integer.parseInt(st.nextToken());
+        int E = Integer.parseInt(st.nextToken());
+        dist[S] =0;
+        pq.offer(new Point(S,0));
+        while(!pq.isEmpty()) {
+        	Point p = pq.poll();
+        	if(visited[p.e])continue;
+        	visited[p.e] =true;
+        	for(Point next: g[p.e]) {
+        		if(!visited[next.e]&&dist[next.e]>dist[p.e]+next.c) {
+        			dist[next.e] = dist[p.e]+next.c;
+        			pq.offer(new Point(next.e,dist[next.e]));
+        		}
+        	}
+        }
+        System.out.println(dist[E]);
+    }
+
+	
+	
+	
+}
