@@ -8,6 +8,7 @@ import java.util.*;
  */
 public class 햄버거다이어트_5215 {
 	static int N, LimitCal, max;
+	static HashMap<Integer, int[]> map;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -18,7 +19,7 @@ public class 햄버거다이어트_5215 {
 			LimitCal = Integer.parseInt(st.nextToken());
 			max = Integer.MIN_VALUE;
 
-			HashMap<Integer, int[]> map = new HashMap<>();
+			map = new HashMap<>();
 			for (int i = 0; i < N; i++) {
 				st = new StringTokenizer(br.readLine());
 				int score = Integer.parseInt(st.nextToken());
@@ -27,6 +28,7 @@ public class 햄버거다이어트_5215 {
 			}
 
 			recursive(map, 0, 0, 0, new boolean[N]);
+//			recursive(0, 0, 0);
 
 			System.out.println("#" + test_case + " " + max);
 		}
@@ -48,7 +50,22 @@ public class 햄버거다이어트_5215 {
 				v[i] = false;
 			}
 		}
-
 	}
+
+//	private static void recursive(int k, int ScoreSum, int Calsum) {
+//		if (Calsum > LimitCal)
+//			return;
+//
+//		max = Math.max(max, ScoreSum);
+//
+//		if (max < ScoreSum)
+//			return;
+//
+//		if (k == N)
+//			return;
+//
+//		recursive(k + 1, ScoreSum + map.get(k)[0], Calsum + map.get(k)[1]);
+//		recursive(k + 1, ScoreSum, Calsum);
+//	}
 
 }

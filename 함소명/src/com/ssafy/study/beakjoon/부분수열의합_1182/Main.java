@@ -48,7 +48,16 @@ public class Main {
 				v[i] = false;
 			}
 		}
-
 	}
+
+//	public static void DFS(int aIdx, int sum) {
+//		if(aIdx == N) {
+//			if(S==sum)cnt++;
+//			return;
+//		}
+//		
+//		DFS(aIdx+1, sum+arr[aIdx]);
+//		DFS(aIdx+1, sum);
+//	}
 
 }
