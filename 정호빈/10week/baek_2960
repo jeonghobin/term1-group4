@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st;
+		st = new StringTokenizer(br.readLine());
+		int N = Integer.parseInt(st.nextToken());
+		int K = Integer.parseInt(st.nextToken());
+		boolean[] prime = new boolean[N+1];
+		prime[0]=prime[1]=true;
+		int cnt=0;
+		L:for(int i=2;i<=N;i++) {
+			if(prime[i])continue;
+			cnt++;
+			if(cnt==K) {
+				System.out.println(i);
+				break L;
+			}
+			for(int j=i*i;j<=N;j+=i) {
+				if(!prime[j]) {
+					prime[j]=true;
+					cnt++;
+					if(cnt==K) {
+						System.out.println(j);
+						break L;
+					}
+				}
+			}
+		}
+		
+		
+	}
+	
+
+}

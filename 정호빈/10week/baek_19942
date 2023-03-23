@@ -1,0 +1,103 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+	static int N,min=Integer.MAX_VALUE;
+	static int[][] arr;
+	static int[] minnum= new int[4];
+	static int[] out;
+	static ArrayList<Integer> list,rslist;
+	static String list1 ="", rsstr="";
+	
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st;
+		N = Integer.parseInt(br.readLine());
+		arr = new int[N][5];
+		st = new StringTokenizer(br.readLine());
+		for(int i=0;i<4;i++) {
+			minnum[i] = Integer.parseInt(st.nextToken());
+		}
+		for(int i=0;i<N;i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j=0;j<5;j++) {
+				arr[i][j] = Integer.parseInt(st.nextToken());
+			}
+		}
+		list = new ArrayList<>();
+		rslist = new ArrayList<>();
+		out = new int[5];
+		recur(0);
+		if(min==Integer.MAX_VALUE) {
+			System.out.println(-1);
+		}else {
+		System.out.println(min);
+		for(int i:rslist) {
+			System.out.print(i+" ");
+		}
+		}
+	}
+	private static void recur(int cnt) {
+		// TODO Auto-generated method stub
+		if(N==cnt) {
+			if(check()) {
+				if(min>out[4]) {
+					min = out[4];
+					rslist.clear();
+					rslist.addAll(list);
+				}else if(min==out[4]) {
+					int rl = rslist.size();
+					int ll = list.size();
+					int s=0,e=0,flag=0;
+					while(s<rl&&e<ll) {
+						int r = rslist.get(s);
+						int l = list.get(e);
+						if(r>l) {
+							rslist.clear();
+							rslist.addAll(list);
+							flag=0;
+							break;
+						}else if(r<l) {
+							flag=0;
+							break;
+						}else {
+							s++;
+							e++;
+							flag=1;
+						}
+					}
+					if(flag==1) {
+						if(rl>ll) {
+							rslist.clear();
+							rslist.addAll(list);
+						}
+					}
+				}
+			}
+			return;
+		}
+		for(int i=0;i<5;i++) {
+			out[i] += arr[cnt][i];
+		}
+		
+		list.add(cnt+1);
+		recur(cnt+1);
+		for(int i=0;i<5;i++) {
+			out[i] -= arr[cnt][i];
+		}
+		list.remove(list.size()-1);
+		recur(cnt+1);
+		
+	}
+	private static boolean check() {
+		for(int i=0;i<4;i++) {
+			if(minnum[i]>out[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+
+}
