@@ -1,0 +1,61 @@
+import java.util.*;
+import java.io.*;
+
+
+public class Main {
+	static int N;
+	static int[] arr;
+	static int[] v;
+	static boolean[] v2;
+	private static boolean[] v3;
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st;
+		int T = Integer.parseInt(br.readLine());
+		for(int t=0;t<T;t++) {
+			N = Integer.parseInt(br.readLine());
+			arr = new int[N+1];
+			v2= new boolean[N+1];
+			v3=new boolean[N+1];
+			st = new StringTokenizer(br.readLine());
+			for(int i=1;i<=N;i++) {
+				arr[i] = Integer.parseInt(st.nextToken());
+			}
+			v = new int[N+1];
+			for(int i=1;i<=N;i++) {
+				if(v[i]==0) {
+					solve(i);
+				}
+			}int cnt=0;
+			for(int i=1;i<=N;i++) {
+				if(v[i]<2)cnt++;
+			}
+			System.out.println(cnt);
+		}
+		
+		
+		
+	}
+
+	private static void solve(int i) {
+		Queue<Integer> que = new LinkedList<Integer>();
+		que.add(i);
+		v[i]++;
+		Set<Integer> list = new TreeSet<Integer>();
+		list.add(i);
+		while(!que.isEmpty()) {
+			int a = que.poll();
+			if(v[arr[a]]<2&&!v3[arr[a]]) {
+				v[arr[a]]++;
+				list.add(arr[a]);
+				que.offer(arr[a]);
+			}
+		}
+		for(int j:list) {
+			v3[j] = true;
+		}
+	}
+	
+	
+}
