@@ -1,4 +1,4 @@
-package com.ssafy.study.beakjoon.더하기.더하기2_12101;
+package com.ssafy.study.beakjoon.일이삼더하기.더하기2_12101;
 
 import java.io.*;
 import java.util.*;
