@@ -9,10 +9,12 @@ import java.util.StringTokenizer;
 
 import javax.management.Query;
 
-public class Main {
-	static int N, Ans;
+//17069 파이프 옮기기2
+//DP 사용
+public class Main2 {
+	static int N, Ans, cnt;
 	static int[][] arr;
-	static boolean[][] v;
+	static int[][][] dp;
 
 	// 가로,세로,대각선
 	// 0,1,2
@@ -29,13 +31,14 @@ public class Main {
 			this.c = c;
 			this.dir = dir;
 		}
+
 	}
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
 		arr = new int[N][N];
-		v = new boolean[N][N];
+		dp = new int[N][N][3];
 
 		for (int i = 0; i < N; i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
@@ -44,17 +47,17 @@ public class Main {
 			}
 		}
 
-//		BFS();
-		DFS(0,1,0);
+		Ans = DFS(0,1,0);
 		System.out.println(Ans);
 	}
 	
 	
-	private static void DFS(int r, int c, int dir) {
+	private static int DFS(int r, int c, int dir) {
 		if (r == N - 1 && c == N - 1) {
-			Ans++;
-			return;
+			return 1;
 		}
+		
+		if(dp[r][c][dir]!=0) return dp[r][c][dir];
 		
 		for (int d = 0; d < 3; d++) {
 			if(dir==0 && d==1) continue;
@@ -74,52 +77,9 @@ public class Main {
 			}
 			
 			if (nr >= 0 && nr < N && nc >= 0 && nc < N && arr[nr][nc] == 0 && isEmpty)
-				DFS(nr, nc, d);
+				 dp[r][c][dir] += DFS(nr, nc, d);
 		}
+		
+		return dp[r][c][dir];
 	}
-
-
-//	// 시간초과..
-//	static Queue<Point> Q = new LinkedList<>();
-//	private static void BFS() {
-//		Q.add(new Point(0, 1, 0));
-//
-//		while (!Q.isEmpty()) {
-//			Point p = Q.poll();
-//
-//			boolean isEmpty = true;
-//			for (int j = 0; j < 2; j++) {
-//				int nr = p.r + dr[j];
-//				int nc = p.c + dc[j];
-//				if (nr >= 0 && nr < N && nc >= 0 && nc < N && arr[nr][nc] != 0)
-//					isEmpty = false;
-//			}
-//
-//			if (isEmpty)
-//				rotation(p, 2);
-//			if (p.dir == 0) {
-//				rotation(p, 0);
-//			} else if (p.dir == 1) {
-//				rotation(p, 1);
-//			} else if (p.dir == 2) {
-//				rotation(p, 0);
-//				rotation(p, 1);
-//			}
-//		}
-//
-//		System.out.println(Ans);
-//	}
-//
-//	private static void rotation(Point p, int i) {
-//		int nr = p.r + dr[i];
-//		int nc = p.c + dc[i];
-//
-//		if (nr >= 0 && nr < N && nc >= 0 && nc < N && arr[nr][nc] == 0) {
-//			Q.add(new Point(nr, nc, i));
-//
-//			if (nr == N - 1 && nc == N - 1)
-//				Ans++;
-//		}
-//	}
-
 }
