@@ -1,0 +1,76 @@
+import java.util.*;
+import java.io.*;
+
+
+public class Main {
+	
+	static int N,Min=Integer.MAX_VALUE;
+	static int[] a,p;
+	static int[][] arr;
+	static List<int[]> g = new LinkedList<>();
+	
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st;
+		N = Integer.parseInt(br.readLine());
+		a = new int[N+1];
+		p = new int[N+1];
+		for(int i=1;i<=N;i++) {
+			a[i] = Integer.parseInt(br.readLine());
+			p[i]=i;
+		}
+		for(int i=1;i<=N;i++) {
+			g.add(new int[] {0,i,a[i]});
+		}
+		for(int i=1;i<=N;i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j=1;j<=N;j++) {
+				int ab = Integer.parseInt(st.nextToken());
+				if(ab==0)continue;
+				g.add(new int[] {i,j,ab});
+			}
+		}
+		Collections.sort(g,new Comparator<int[]>() {
+			@Override
+			public int compare(int[] o1, int[] o2) {
+				// TODO Auto-generated method stub
+				return o1[2]-o2[2];
+			}
+		});
+		int sum=0;
+		for(int[] i:g) {
+			if(find(i[0])!=find(i[1])) {
+				sum+=i[2];
+				union(i[0],i[1]);
+			}
+		}
+		
+		System.out.println(sum);
+	}
+
+	private static void union(int i, int j) {
+		int pi = find(i);
+		int pj = find(j);
+		if(pi!=pj) {
+			p[pi] = pj;
+		}
+	}
+
+	private static int find(int i) {
+		// TODO Auto-generated method stub
+		if(p[i]==i)return i;
+		return p[i]=find(p[i]);
+	}
+
+	
+
+	
+	
+
+
+
+	
+
+	
+}
