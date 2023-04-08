@@ -1,0 +1,49 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+
+	static int N;
+	static int[][]arr;
+	static int[][]d;
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		N = Integer.parseInt(br.readLine());
+		arr = new int[N][N];
+		d = new int[N][1<<N];
+		for(int i=0;i<N;i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j=0;j<N;j++) {
+				arr[i][j] = Integer.parseInt(st.nextToken());
+			}
+		}
+		for(int i=0;i<N;i++)
+			Arrays.fill(d[i], 10000000);
+		
+		System.out.println(dfs(0,1));
+	}
+
+	private static int dfs(int v, int bit) {
+		// TODO Auto-generated method stub
+		if(bit==(1<<N)-1) {
+			if(arr[v][0]==0)return 10000000;
+			return arr[v][0]; 
+		}
+		if(d[v][bit]!=10000000) {
+			return d[v][bit];
+		}
+		
+		d[v][bit] = 10000000-1;
+		for(int i=0;i<N;i++) {
+			if((bit&(1<<i))!=0)continue;
+			if(arr[v][i]==0)continue;
+			d[v][bit] = Math.min(d[v][bit], dfs(i,bit|1<<i)+arr[v][i]);
+		}
+		
+		return d[v][bit];
+	}
+
+
+}
