@@ -1,9 +1,9 @@
-package com.ssafy.study.beakjoon.backTracking.beak_9663_Re;
+package com.ssafy.study.beakjoon.NQueen_9663_Re;
 
 import java.util.Scanner;
 
 /*
- * M-Queen
+ * N-Queen
  */
 public class Main {
 
