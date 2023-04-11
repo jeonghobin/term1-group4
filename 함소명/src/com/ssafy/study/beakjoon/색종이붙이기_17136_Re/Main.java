@@ -21,6 +21,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		paper = new int[10][10];
+		int Ans = Integer.MAX_VALUE;
 		for (int i = 0; i < 10; i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			for (int j = 0; j < 10; j++) {
@@ -28,7 +29,7 @@ public class Main {
 			}
 		}
 
-		// 붙일 수 있는 색종이 가장 큰 크기
+		// 붙일 수 있는 색종이 가장 큰 크기 maxSize 구하기
 		for (int k = 1; k < 6; k++) {
 			for (int i = 0; i < 10; i++) {
 				for (int j = 0; j < 10; j++) {
@@ -37,7 +38,6 @@ public class Main {
 			}
 		}
 
-		int resultCnt = Integer.MAX_VALUE;
 		// 크기가 큰 색종이 부터 5장 붙여보기
 		for (int T = maxSize; T > 0; T--) {
 			cntPaper = new int[] { 0, 5, 5, 5, 5, 5 };
@@ -66,15 +66,15 @@ public class Main {
 				}
 
 				if (sum == 0 && cnt != 0)
-					resultCnt = Math.min(resultCnt, cnt);
+					Ans = Math.min(Ans, cnt);
 
 			}
 		}
 
 		if (maxSize == 0)
-			resultCnt = 0;
+			Ans = 0;
 
-		System.out.println(resultCnt < Integer.MAX_VALUE ? resultCnt : -1);
+		System.out.println(Ans < Integer.MAX_VALUE ? Ans : -1);
 	}
 
 	// 가장 큰거 5개 붙이고 나서 -> 4개 붙이고 나서 ~ 0개 붙이고 나서 다음 크기 다 붙여보기
@@ -104,7 +104,7 @@ public class Main {
 				}
 			}
 
-//			print(newPaper);
+			print(newPaper);
 
 			cnt++;
 			cntPaper[size]--;
