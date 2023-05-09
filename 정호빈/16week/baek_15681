@@ -1,0 +1,73 @@
+import java.util.*;
+import java.io.*;
+
+
+
+public class Main {
+	
+	static int N,R,Q;
+	static List<Integer>[] g;
+	static int[] par;
+	private static int[] sz;
+	
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st;
+		st = new StringTokenizer(br.readLine());
+		N = Integer.parseInt(st.nextToken());
+		R = Integer.parseInt(st.nextToken());
+		Q = Integer.parseInt(st.nextToken());
+		par = new int[N+1];
+		par[R] = -1;
+		g = new LinkedList[N+1];
+		for(int i=1;i<=N;i++) {
+			g[i] = new LinkedList<Integer>();
+		}
+		for(int i=0;i<N-1;i++) {
+			st = new StringTokenizer(br.readLine());
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			g[a].add(b);
+			g[b].add(a);
+		}
+		makepar(R,-1);
+		sz = new int[N+1];
+		Arrays.fill(sz, 1);
+		dfs(R);
+		for(int i=0;i<Q;i++) {
+			int a = Integer.parseInt(br.readLine());
+			bw.write(sz[a]+"\n");
+		}
+		bw.flush();
+		bw.close();
+	}
+
+	private static void dfs(int cur) {
+		
+		for(int nxt:g[cur]) {
+			if(nxt==par[cur])continue;
+			dfs(nxt);
+			sz[cur]+=sz[nxt];
+		}
+		
+	}
+
+	private static void makepar(int cur, int pre) {
+		
+		for(int nxt: g[cur]) {
+			if(nxt==pre)continue;
+			makepar(nxt,cur);
+			par[nxt]=cur;
+		}
+		
+		
+	}
+
+	
+	
+	
+	
+	
+}
