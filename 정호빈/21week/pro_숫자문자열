@@ -1,0 +1,54 @@
+import java.util.*;
+class Solution {
+    public int solution(String s) {
+        int answer = 0;
+        String str = "";
+        for(int i=0;i<s.length();i++){
+            char chr = s.charAt(i);
+            if(chr=='o'){
+                str+=1;
+                i+=2;
+            }else if(chr=='t'){
+                String temp=s.substring(i,i+3);
+                if(temp.equals("two")){
+                    str+=2;
+                    i+=2;
+                }else{
+                    str+=3;
+                    i+=4;
+                }
+            }else if(chr=='f'){
+                String temp=s.substring(i,i+4);
+                if(temp.equals("four")){
+                    str+=4;
+                    i+=3;
+                }else{
+                    str+=5;
+                    i+=3;
+                }
+            }else if(chr=='s'){
+                String temp=s.substring(i,i+3);
+                if(temp.equals("six")){
+                    str+=6;
+                    i+=2;
+                }else{
+                    str+=7;
+                    i+=4;
+                }
+            }else if(chr=='e'){
+                str+=8;
+                i+=4;
+            }else if(chr=='n'){
+                str+=9;
+                i+=3;
+            }else if(chr=='z'){
+                str+=0;
+                i+=3;
+            }else{
+                str+=chr;
+            }
+        }
+        answer = Integer.parseInt(str);
+        return answer;
+    }
+}
