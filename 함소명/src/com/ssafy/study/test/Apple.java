@@ -1,4 +1,4 @@
-package com.ssafy.study;
+package com.ssafy.study.test;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

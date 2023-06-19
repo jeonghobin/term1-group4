@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+//배열돌리기1
 public class Main {
 	static int N, M;
 
